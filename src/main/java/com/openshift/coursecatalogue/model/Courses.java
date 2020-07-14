@@ -1,6 +1,7 @@
 package com.openshift.coursecatalogue.model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 /**
  * @author kaleembasha.akbar
@@ -8,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * Model class for Course Document
  */
 @Document
-public class Course {
+public class Courses {
 	@Id
 	private String id;
 	
@@ -16,7 +17,8 @@ public class Course {
 	
 	private String description;
 	
-	private User owner;
+	@DBRef(db="user")
+	private String owner;
 	
 	public String getId() {
 		return id;
@@ -42,11 +44,11 @@ public class Course {
 		this.description = description;
 	}
 
-	public User getOwner() {
+	public String getOwner() {
 		return owner;
 	}
 
-	public void setOwner(User owner) {
+	public void setOwner(String owner) {
 		this.owner = owner;
 	}
 

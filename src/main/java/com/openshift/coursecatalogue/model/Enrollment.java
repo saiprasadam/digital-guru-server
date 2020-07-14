@@ -13,9 +13,9 @@ public class Enrollment {
 	@Id
 	private String id;
 	
-	private User user_id;
+	private Users user_id;
 	
-	private Course course_id;
+	private Courses course_id;
 	
 	private String start_date;
 	
@@ -31,19 +31,19 @@ public class Enrollment {
 		this.id = id;
 	}
 
-	public User getUser_id() {
+	public Users getUser_id() {
 		return user_id;
 	}
 
-	public void setUser_id(User user_id) {
+	public void setUser_id(Users user_id) {
 		this.user_id = user_id;
 	}
 
-	public Course getCourse_id() {
+	public Courses getCourse_id() {
 		return course_id;
 	}
 
-	public void setCourse_id(Course course_id) {
+	public void setCourse_id(Courses course_id) {
 		this.course_id = course_id;
 	}
 
