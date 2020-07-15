@@ -1,4 +1,16 @@
-From openjdk:8
-copy target/CourseCatalogueServerApp-0.0.1-SNAPSHOT.jar .
+FROM openjdk:8-jdk-alpine
+
+ENV SPRING_PROFILES_ACTIVE docker
+
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","CourseCatalogueServerApp-0.0.1-SNAPSHOT.jar"]
+EXPOSE 8082
+
+RUN mkdir -p /build
+
+WORKDIR /build
+
+COPY target/*.jar app.jar
+
+RUN chmod 777 app.jar
+
+ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "app.jar"]
