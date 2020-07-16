@@ -35,4 +35,9 @@ public class UserRepo{
 		return mongoTemplate.findOne(query,Users.class);
 	}
 	
+	public Users findByName(String name) {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("name").is(name));
+		return mongoTemplate.findOne(query,Users.class);
+	}
 }

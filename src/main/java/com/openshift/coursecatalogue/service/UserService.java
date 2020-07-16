@@ -30,4 +30,8 @@ public class UserService {
 		// TODO Auto-generated method stub
 		return userRepo.findOne(owner);
 	}
+	
+	public Users getByName(String name) {
+		return userRepo.findByName(name);
+	}
 }
