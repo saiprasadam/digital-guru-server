@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.openshift.coursecatalogue.model.Courses;
+import com.openshift.coursecatalogue.model.Filter;
 import com.openshift.coursecatalogue.model.Users;
+import com.openshift.coursecatalogue.model.UserwithCourse;
 import com.openshift.coursecatalogue.service.CourseService;
 import com.openshift.coursecatalogue.service.UserService;
 
@@ -55,4 +58,23 @@ public class CourseController {
 	
 		return usercourse;
 	}
+
+	@GetMapping(path = "/getAllCourses")
+	public List<UserwithCourse> getCourses() {
+		List<UserwithCourse> usercourse = new ArrayList<>();
+		List<Courses> course = courseService.findAll();
+		course.stream().forEach(action -> {
+
+			String owner = action.getOwner();
+			String name = action.getName();
+			String desc = action.getDescription();
+			List<Filter> filt = action.getFilters();
+			Users users = userService.findOne(owner);
+			LOG.info("Getting users of value " + users.getName());
+			UserwithCourse user = new UserwithCourse(users.getName(), desc, name, filt);
+			usercourse.add(user);
+		});
+		return usercourse;
+	}
+
 }

@@ -1,8 +1,12 @@
 package com.openshift.coursecatalogue.model;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+
 /**
  * @author kaleembasha.akbar
  *
@@ -12,14 +16,15 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Courses {
 	@Id
 	private String id;
-	
+
 	private String name;
-	
+
 	private String description;
-	
-	@DBRef(db="user")
+
+	private List<Filter> filters;
+	@DBRef(db = "users")
 	private String owner;
-	
+
 	public String getId() {
 		return id;
 	}
@@ -51,5 +56,30 @@ public class Courses {
 	public void setOwner(String owner) {
 		this.owner = owner;
 	}
+
+	public List<Filter> getFilters() {
+		return filters;
+	}
+
+	public void setFilters(List<Filter> filters) {
+		this.filters = filters;
+	}
+
+	public Courses(String id, String name, String description, List<Filter> filters, String owner) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.filters = filters;
+		this.owner = owner;
+	}
+
+	public Courses() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+	
 
 }
