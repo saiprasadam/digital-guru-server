@@ -34,4 +34,10 @@ public class UserService {
 	public Users getByName(String name) {
 		return userRepo.findByName(name);
 	}
+	public String insertUsers(Users user) {
+		return userRepo.insertUsers(user);
+	}
+	public String sendTemporaryPassword(String toEmail, String userId) {
+		return userRepo.sendTemporaryPassword(toEmail, userId);		
+	}
 }
