@@ -3,7 +3,6 @@ FROM openjdk:8-jdk-alpine
 ENV SPRING_PROFILES_ACTIVE docker
 
 EXPOSE 8080
-EXPOSE 8082
 
 RUN mkdir -p /build
 
