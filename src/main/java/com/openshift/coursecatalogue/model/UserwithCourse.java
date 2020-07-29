@@ -3,15 +3,31 @@ package com.openshift.coursecatalogue.model;
 import java.util.List;
 
 public class UserwithCourse {
-	
+
+	private String id;
 	private String ownerName;
 	private String description;
 	private String courseName;
-	 private List<Filter> filters;
-	
+	private List<Filter> filters;
+
 	public String getOwnerName() {
 		return ownerName;
 	}
+
+	/**
+	 * @return the id
+	 */
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	public void setOwnerName(String ownerName) {
 		this.ownerName = ownerName;
 	}
@@ -41,7 +57,14 @@ public class UserwithCourse {
 		this.filters = filters;
 	}
 	
-	
+	public UserwithCourse(String id, String ownerName, String description, String courseName, List<Filter> filters) {
+		super();
+		this.id = id;
+		this.ownerName = ownerName;
+		this.description = description;
+		this.courseName = courseName;
+		this.filters = filters;
+	}
 	
 
 }
