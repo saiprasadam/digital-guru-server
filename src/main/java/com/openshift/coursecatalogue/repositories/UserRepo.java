@@ -49,7 +49,8 @@ public class UserRepo {
 		return mongoTemplate.findOne(query, Users.class);
 	}
 
-	public String insertUsers(Users userData) {
+	public JsonNode insertUsers(Users userData) {
+		JsonNode responceNode = mapper.createObjectNode();
 		try {
 			JsonNode userNode = mapper.createObjectNode();
 			Query query = new Query();
@@ -61,10 +62,12 @@ public class UserRepo {
 						+ ",  \n\n Welcome to PERFICIENT online courses. Your user name is already exits. \n\n Please change your user name");
 				((ObjectNode) userNode).put("to", userData.getEmail());
 				mailServices.sendMail(userNode);
-				return "User is exited already";
+				((ObjectNode) responceNode).put("status", true);
+				((ObjectNode) responceNode).put("data", "User is exited already");
+				return responceNode;
 
 			} else {
-				Users user1 = mongoTemplate.save(userData, "Users");
+				Users user1 = mongoTemplate.save(userData, "users");
 				((ObjectNode) userNode).put("subject", "Welcome Online Course");
 				((ObjectNode) userNode).put("message", "Hi " + userData.getName()
 						+ ",  \n\n Welcome to PERFICIENT online courses. Your account has been created successfully. Your user name is "
@@ -72,7 +75,9 @@ public class UserRepo {
 						+ " \n\n Please visit this link http://localhost:8080");
 				((ObjectNode) userNode).put("to", userData.getEmail());
 				mailServices.sendMail(userNode);
-				return "User created successfully";
+				((ObjectNode) responceNode).put("status", true);
+				((ObjectNode) responceNode).put("data","User created successfully");
+				return responceNode;
 			}
 
 		} catch (NullPointerException e) {
@@ -81,7 +86,7 @@ public class UserRepo {
 			e.printStackTrace();
 		}
 
-		return "";
+		return responceNode;
 	}
 
 	public JsonNode getTemporaryPassword(String tomail, String userName) {
@@ -115,9 +120,25 @@ public class UserRepo {
 		
 	}
 
-	public String sendTemporaryPassword(String toEmail, String userId) {
-		mailServices.sendMail(getTemporaryPassword(toEmail, userId));
-		return "Email send successfully";
+	public JsonNode sendTemporaryPassword(String toEmail, String userId) {
+		JsonNode responceNode = mapper.createObjectNode();
+		try {
+			mailServices.sendMail(getTemporaryPassword(toEmail, userId));
+			((ObjectNode)responceNode).put("status", true);
+			((ObjectNode)responceNode).put("data",  "Email send successfully");
+			return responceNode;
+		}catch(NullPointerException e) {
+			((ObjectNode)responceNode).put("status", false);
+			((ObjectNode)responceNode).put("data",  "Email Not send. Exception accured");
+			e.printStackTrace();
+			return responceNode;
+		}catch(Exception e) {
+			((ObjectNode)responceNode).put("status", false);
+			((ObjectNode)responceNode).put("data",  "Email Not send. Exception accured");
+			e.printStackTrace();
+			return responceNode;
+		}
+		
 	}
 
 }

@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.openshift.coursecatalogue.model.Users;
 import com.openshift.coursecatalogue.repositories.UserRepo;
 /**
@@ -34,10 +35,10 @@ public class UserService {
 	public Users getByName(String name) {
 		return userRepo.findByName(name);
 	}
-	public String insertUsers(Users user) {
+	public JsonNode insertUsers(Users user) {
 		return userRepo.insertUsers(user);
 	}
-	public String sendTemporaryPassword(String toEmail, String userId) {
+	public JsonNode sendTemporaryPassword(String toEmail, String userId) {
 		return userRepo.sendTemporaryPassword(toEmail, userId);		
 	}
 }
