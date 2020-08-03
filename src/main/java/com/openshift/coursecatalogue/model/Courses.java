@@ -5,8 +5,6 @@ import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-
 /**
  * @author kaleembasha.akbar
  *
@@ -16,15 +14,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Courses {
 	@Id
 	private String id;
-
+	
 	private String name;
-
+	
 	private String description;
-
 	private List<Filter> filters;
-	@DBRef(db = "users")
+	@DBRef(db="users")
 	private String owner;
-
+	
 	public String getId() {
 		return id;
 	}
@@ -75,11 +72,7 @@ public class Courses {
 	}
 
 	public Courses() {
-		super();
-		// TODO Auto-generated constructor stub
+		super(); // TODO Auto-generated constructor stub }
 	}
-
-
 	
-
 }
