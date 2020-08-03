@@ -89,6 +89,76 @@ usercourse.add(course.getName());
 	*/
 		return usercourse;
 	}
+	
+	@GetMapping(path = "/getAllCourses")
 
+
+
+	public List<UserwithCourse> getCourses() {
+
+
+
+		List<UserwithCourse> usercourse = new ArrayList<>();
+
+
+
+		List<Courses> course = courseService.findAll();
+
+
+
+		course.stream().forEach(action -> {
+
+
+
+
+
+
+
+			String id = action.getId();
+
+
+
+			String owner = action.getOwner();
+
+
+
+			String name = action.getName();
+
+
+
+			String desc = action.getDescription();
+
+
+
+			List<Filter> filt = action.getFilters();
+
+
+
+			Users users = userService.findOne(owner);
+
+
+
+			LOG.info("Getting users of value " + users.getName());
+
+
+
+			UserwithCourse user = new UserwithCourse(users.getName(), desc, name, filt);
+
+
+
+			UserwithCourse user = new UserwithCourse(id, users.getName(), desc, name, filt);
+
+
+
+			usercourse.add(user);
+
+
+
+		});
+
+
+
+		return usercourse;
+	}
 	
 }
