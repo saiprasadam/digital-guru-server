@@ -32,4 +32,22 @@ public class CourseService {
 		// TODO Auto-generated method stub
 		return courseRepo.findOne(courseId);
 	}
+public Enrollments findEnrollCourse(ObjectId objectId) {
+		// TODO Auto-generated method stub
+			Enrollments enroll= new Enrollments();
+		
+		 Enrollments lst=enrollmentRepo.findOne(objectId);
+		/* for(Enrollment en:lst) {
+			 if(en.getCourse_id().equals(objectId)) {
+				 enroll.setCourse_id(en.getCourse_id());
+				 enroll.setStart_date(en.getStart_date());
+				 enroll.setEnd_date(en.getEnd_date());
+				 enroll.setStatus(en.getStatus());
+				 
+				 
+			 }*/
+	//	 }
+		 return lst;
+			//	findOne(courseId);
+	}
 }
