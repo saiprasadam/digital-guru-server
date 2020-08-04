@@ -2,13 +2,16 @@ package com.openshift.coursecatalogue.service;
 
 import java.util.List;
 
+import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.openshift.coursecatalogue.model.Courses;
+import com.openshift.coursecatalogue.model.Enrollments;
 import com.openshift.coursecatalogue.repositories.CourseRepo;
+import com.openshift.coursecatalogue.repositories.EnrollmentRepo;
 
 /**
  * @author kaleembasha.akbar
@@ -22,6 +25,8 @@ public class CourseService {
 	@Autowired
 	private CourseRepo courseRepo;
 
+	@Autowired
+	private EnrollmentRepo  enrollmentRepo;
 	
 	public List<Courses> findAll(){
 		return courseRepo.findAll();

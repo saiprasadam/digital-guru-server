@@ -12,6 +12,7 @@ import org.springframework.data.mongodb.core.schema.JsonSchemaObject.Type.BsonTy
 import org.springframework.stereotype.Repository;
 
 import com.openshift.coursecatalogue.model.Courses;
+import com.openshift.coursecatalogue.model.Enrollment;
 import com.openshift.coursecatalogue.model.Enrollments;
 
 /**
