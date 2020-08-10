@@ -8,8 +8,8 @@ RUN mkdir -p /build
 
 WORKDIR /build
 
-COPY target/*.jar app.jar
+COPY target/*.war app.war
 
-RUN chmod 777 app.jar
+RUN chmod 777 app.war
 
-ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "app.war"]
